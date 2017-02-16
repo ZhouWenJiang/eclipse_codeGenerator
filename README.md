@@ -123,3 +123,15 @@ freemarker模板
 		String  getterMethodName  Get方法名
 		
 		String  setterMethodName  Set方法名
+
+## Key
+
+		String  pkTableName       PKTABLE_NAME
+		
+		String  pkColumnName      PKCOLUMN_NAME
+		
+		String  fkTableName       FKTABLE_NAME
+		
+		String  fkColumnName      FKCOLUMN_NAME
+		
+		Integer seq               KEY_SEQ
