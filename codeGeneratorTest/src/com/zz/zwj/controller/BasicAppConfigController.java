@@ -10,7 +10,7 @@ import java.util.Date;
  * <p>实体类</p>
  * <p>Table: basic_app_config - 应用配置信息</p>
  *
- * @since 2017-02-16 04:37:04
+ * @since 2017-02-16 06:07:20
  */
 public class BasicAppConfigController {
 

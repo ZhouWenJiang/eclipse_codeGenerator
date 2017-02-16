@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.zz.zwj.avatar.dao.model.BasicAppConfig" >
+  <resultMap id="BaseResultMap" type="com.zz.zwj.avatar.dao.model.BasicAppConfig" >
+	<id column="config_key" property="configKey" jdbcType="VARCHAR" />
+	<result column="config_value" property="configValue" jdbcType="VARCHAR" />
+	<result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
+	<result column="status" property="status" jdbcType="TINYINT" />
+	<result column="config_group" property="configGroup" jdbcType="INTEGER" />
+	<result column="remark" property="remark" jdbcType="VARCHAR" />
+  </resultMap>
+    <sql id="Base_Column_List" >
+    config_key,
+    config_value,
+    create_time,
+    status,
+    config_group,
+    remark
+  	</sql>
+  
+</mapper>

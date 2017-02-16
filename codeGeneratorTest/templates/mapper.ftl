@@ -1,48 +1,18 @@
-<#include "templates/copyright.ftl"/>
-package ${targetPackage};
-
-<#if (table.hasDateColumn)>
-import java.util.Date;
-</#if>
-<#if (table.hasBigDecimalColumn)>
-import java.math.BigDecimal;
-</#if>
-
-
-/**
- * <p>实体类</p>
- * <p>Table: ${table.tableName} - ${table.remarks}</p>
- *
- * @since ${.now}
- */
-public class ${table.className}Service {
-<#list table.primaryKeys as key>
-
-    /** ${key.columnName} - ${key.remarks} */
-    private ${key.javaType} ${key.javaProperty};
-</#list>
-<#list table.baseColumns as column>
-
-    /** ${column.columnName} - ${column.remarks} */
-    private ${column.javaType} ${column.javaProperty};
-</#list>
-
-<#list table.primaryKeys as key>
-
-    public ${key.javaType} ${key.getterMethodName}(){
-        return this.${key.javaProperty};
-    }
-    public void ${key.setterMethodName}(${key.javaType} ${key.javaProperty}){
-        this.${key.javaProperty} = ${key.javaProperty};
-    }
-</#list>
-<#list table.baseColumns as column>
-
-    public ${column.javaType} ${column.getterMethodName}(){
-        return this.${column.javaProperty};
-    }
-    public void ${column.setterMethodName}(${column.javaType} ${column.javaProperty}){
-        this.${column.javaProperty} = ${column.javaProperty};
-    }
-</#list>
-}
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="${beanPackage}.${table.className}" >
+  <resultMap id="BaseResultMap" type="${beanPackage}.${table.className}" >
+	<#list table.primaryKeys as col>
+	<id column="${col.columnName}" property="${col.javaProperty}" jdbcType="${col.jdbcTypeName}" />
+	</#list>
+	<#list table.baseColumns as col>
+	<result column="${col.columnName}" property="${col.javaProperty}" jdbcType="${col.jdbcTypeName}" />
+	</#list>
+  </resultMap>
+    <sql id="Base_Column_List" >
+    <#list table.columns as col> 
+    ${col.columnName}<#if col_has_next>,</#if>
+    </#list>
+  	</sql>
+  
+</mapper>
