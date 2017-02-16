@@ -12,20 +12,25 @@ eclipse_codeGenerator 是一个使用 Freemarker 模板生代码的Eclipse插件
 
 		<?xml version="1.0" encoding="UTF-8" ?>
 		<generatorConfiguration>
-			<properties url="file:///D:/code-gen/conf.properties"/>
+			<properties url="file:///D:/mybatis-gen/mybatis-ibator-conf.properties"/>
 			<classPathEntry location="${mysql.jar.path}" />
 			
 			<jdbcConnection driverClass="${jdbc_driverClassName}"
 			connectionURL="${jdbc_url}" userId="${jdbc_username}" password="${jdbc_password}" />
 				
-			<context name="model">
+			<context name="实体类">
 				<codeGenerator targetPackage="com.zz.zwj.avatar.dao.model" targetProject="codeGeneratorTest" targetFileNameSuffix="Dao.java" template="templates/dao.ftl"/>
 				<codeGenerator targetPackage="com.zz.zwj.service" targetProject="codeGeneratorTest" targetFileNameSuffix="Service.java" template="templates/service.ftl" />
 				<codeGenerator targetPackage="com.zz.zwj.controller" targetProject="codeGeneratorTest" targetFileNameSuffix="Controller.java" template="templates/controller.ftl"  />
-				<codeGenerator targetPackage="mapper" targetProject="codeGeneratorTest/src/main/resources" targetFileNameSuffix="Mapper.xml" template="templates/entity.ftl" />
+				<codeGenerator targetPath="resources/mapper" targetProject="codeGeneratorTest" targetFileNameSuffix="Mapper.xml" template="templates/entity.ftl"  />
 			</context>
+			<context name="Mapper">
+				<codeGenerator targetPath="resources/mapper" targetProject="codeGeneratorTest" targetFileNameSuffix="Mapper.xml" template="templates/mapper.ftl" >
+					<property name="beanPackage" value="com.zz.zwj.avatar.dao.model"/>
+				</codeGenerator>
+			</context>
+			
 		</generatorConfiguration>
-		
 
 说明
 
