@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?eclipse version="3.4"?>
+<plugin>
+   <extension
+         point="org.eclipse.ui.popupMenus">
+      <objectContribution
+      		adaptable="true"
+            id="com.zz.eclipse.plugins.contribution1"
+            objectClass="org.eclipse.core.resources.IFile">
+         <action
+               class="com.zz.eclipse.plugins.PopAction"
+               icon="icons/logo.png"
+               enablesFor="1"
+               id="com.zz.eclipse.plugins.popup.actions.NewAction"
+               label="Generator Code Framework"
+               menubarPath="additions">
+         </action>
+      </objectContribution>
+   </extension>
+   <runtime>
+            <library name="lib/">
+             <export name="*"/>
+            </library>
+   </runtime>
+</plugin>
