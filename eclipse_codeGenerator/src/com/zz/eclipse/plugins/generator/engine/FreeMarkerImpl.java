@@ -94,8 +94,15 @@ public class FreeMarkerImpl implements TemplateEngine {
       throws TemplateEngineException {
     try {
       Template template = config.getTemplate(codeGeneratorConfig.getTemplate(), "utf-8");
-      String targetPath = EclipseShellUtil
-        .getDirectory(codeGeneratorConfig.getTargetProject(), codeGeneratorConfig.getTargetPackage()).getAbsolutePath();
+      String targetPath = "";
+      if(codeGeneratorConfig.getTargetPackage() != null) {
+        targetPath = EclipseShellUtil
+          .getDirectory(codeGeneratorConfig.getTargetProject(), codeGeneratorConfig.getTargetPackage())
+          .getAbsolutePath();
+      }
+      else {
+        targetPath = classPath + "/" + codeGeneratorConfig.getTargetPath();
+      }
       Table table = (Table) model.get("table");
       String targetFileName = table.getClassName() + codeGeneratorConfig.getTargetFileNameSuffix();
 

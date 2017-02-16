@@ -172,11 +172,26 @@ public class GeneratorConfigurationParser {
     String targetProject = attributes.getProperty("targetProject");
     String template = attributes.getProperty("template");
     String targetFileNameSuffix = attributes.getProperty("targetFileNameSuffix");
+    String targetPath = attributes.getProperty("targetPath");
 
     codeGeneratorConfiguration.setTargetPackage(targetPackage);
     codeGeneratorConfiguration.setTargetProject(targetProject);
     codeGeneratorConfiguration.setTemplate(template);
     codeGeneratorConfiguration.setTargetFileNameSuffix(targetFileNameSuffix);
+    codeGeneratorConfiguration.setTargetPath(targetPath);
+
+    NodeList nodeList = node.getChildNodes();
+    for( int i = 0; i < nodeList.getLength(); i++ ) {
+      Node childNode = nodeList.item(i);
+
+      if(childNode.getNodeType() != Node.ELEMENT_NODE) {
+        continue;
+      }
+
+      if("property".equals(childNode.getNodeName())) {
+        parseProperty(codeGeneratorConfiguration, childNode);
+      }
+    }
   }
 
   private void parseProperty( PropertyHolder propertyHolder, Node node ) {

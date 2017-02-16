@@ -32,7 +32,7 @@ public class WizardPageTwo extends WizardPage {
     group.setText("选择要生成的代码");
 
     for( int i = 0; i < config.getContexts().size(); i++ ) {
-      Context context = config.getContexts().get(0);
+      Context context = config.getContexts().get(i);
       int width = i % 4;
       int height = i / 4;
       Button button = new Button(group, 32);

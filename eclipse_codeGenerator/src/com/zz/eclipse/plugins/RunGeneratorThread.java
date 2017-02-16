@@ -8,8 +8,10 @@ import java.sql.Connection;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
+import java.util.Properties;
 
 import org.eclipse.core.resources.IFile;
 import org.eclipse.core.resources.IProject;
@@ -85,7 +87,6 @@ public class RunGeneratorThread implements IWorkspaceRunnable {
 
       Map<String, Object> model = new HashMap<String, Object>();
 
-      model.put("table", tableModel);
       for( int contextIndex = 0; contextIndex < config.getContexts().size(); contextIndex++ ) {
         Context context = config.getContexts().get(contextIndex);
         if(!context.isSelected()) {// 没有选择的，跳过
@@ -95,9 +96,21 @@ public class RunGeneratorThread implements IWorkspaceRunnable {
         int count = context.getCodeGeneratorConfigurations().size();
         for( int i = 0; i < count; i++ ) {
           try {
-            CodeGeneratorConfiguration codeConfig = config.getContexts().get(0).getCodeGeneratorConfigurations().get(i);
+            CodeGeneratorConfiguration codeConfig = context.getCodeGeneratorConfigurations().get(i);
 
+            model.clear();
+            // MODEL数据组装
+            model.put("table", tableModel);
             model.put("targetPackage", codeConfig.getTargetPackage());
+            Properties properties = codeConfig.getProperties();
+            Iterator<Object> itor = properties.keySet().iterator();
+            while(itor.hasNext()) {
+              String key = (String) itor.next();
+              if("table".equals(key) || "targetPackage".equals(key)) {
+                continue;
+              }
+              model.put(key, properties.get(key));
+            }
 
             templateEngine.processToFile(model, codeConfig);
             EclipseShellUtil.refreshProject(codeConfig.getTargetProject());

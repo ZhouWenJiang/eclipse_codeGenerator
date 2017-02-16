@@ -6,12 +6,13 @@ package com.zz.eclipse.plugins.config;
  * @date : 2017年2月14日 下午5:09:39
  * @version : 2017年2月14日 Zak 首次创建
  */
-public class CodeGeneratorConfiguration {
+public class CodeGeneratorConfiguration extends PropertyHolder {
   private String targetPackage;
   private String targetProject;
   private String template;
   private String encoding = "utf-8";
   private String targetFileNameSuffix;
+  private String targetPath;
 
   public String getTargetPackage() {
     return targetPackage;
@@ -42,5 +43,11 @@ public class CodeGeneratorConfiguration {
   }
   public void setTargetFileNameSuffix( String targetFileNameSuffix ) {
     this.targetFileNameSuffix = targetFileNameSuffix;
+  }
+  public String getTargetPath() {
+    return targetPath;
+  }
+  public void setTargetPath( String targetPath ) {
+    this.targetPath = targetPath;
   }
 }
